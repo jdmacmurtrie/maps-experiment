@@ -19,7 +19,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    debugger
+    this.changePosition()
+  }
+
+  componentDidUpdate() {
+    this.changePosition()
+  }
+
+  changePosition() {
     let mapPosition = { lat: this.props.lat, lng: this.props.lng }
     this.map = new google.maps.Map(this.refs.map, {
       center: mapPosition,
@@ -35,6 +42,10 @@ class App extends React.Component {
     this.props.position(ARC_DE_TRIOMPHE_POSITION.lat, ARC_DE_TRIOMPHE_POSITION.lng)
   }
 
+  soDrag() {
+    alert("Boo")
+  }
+
   render() {
     const mapStyle = {
       width: 500,
@@ -42,10 +53,15 @@ class App extends React.Component {
       border: '1px solid black'
     };
 
+
+    // this.map.addListener('zoom_changed', function() {
+    //     infowindow.setContent('Zoom: ' + map.getZoom());
+    //   });
+      
     return (
       <div>
         <button onClick={this.panToArcDeTriomphe}>Go to Arc De Triomphe</button>
-        <div ref="map" style={mapStyle}>I should be a map!</div>
+        <div ref="map" onChange={this.soDrag} style={mapStyle}>I should be a map!</div>
       </div>
     );
   }
@@ -58,7 +74,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = (state) => {
-  debugger
   return {
     lat: state.lat,
     lng: state.lng

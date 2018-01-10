@@ -8,7 +8,6 @@ let initialState = {
 const changePosition = (state = initialState, action) => {
   switch (action.type) {
     case POSITION:
-    debugger
       return Object.assign({}, state, {
         lat: action.lat,
         lng: action.lng
